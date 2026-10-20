@@ -1,23 +1,33 @@
+
 #include <stdio.h>
+#include <limits.h>
 int main()
 {
-    int a[100], n, i, largest;
-    int *p = a;
+    int a[100], n, i;
+    int largest = INT_MIN;
+    int second = INT_MIN;
     printf("Enter number of elements: ");
     scanf("%d", &n);
-    printf("Enter elements: ");
+    printf("Enter array elements: ");
     for (i = 0; i < n; i++)
     {
-        scanf("%d", p + i);
+        scanf("%d", &a[i]);
     }
-    largest = *p;
-    for (i = 1; i < n; i++)
+    for (i = 0; i < n; i++)
     {
-        if (*(p + i) > largest)
+        if (a[i] > largest)
         {
-            largest = *(p + i);
+            second = largest;
+            largest = a[i];
+        }
+        else if (a[i] < largest && a[i] > second)
+        {
+            second = a[i];
         }
     }
-    printf("Largest = %d\n", largest);
+    if (second == INT_MIN)
+        printf("Second largest does not exist\n");
+    else
+        printf("Second largest = %d\n", second);
     return 0;
 }
